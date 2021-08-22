@@ -39,8 +39,8 @@ jobs:
       - image: 'cimg/python:3.9.6'
     steps:
       - checkout
-      - pip3 install trufflehog
-      - trufflehog --regex --entropy=False .      
+      - run: pip3 install trufflehog
+      - run: trufflehog --regex --entropy=False .      
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
   snyk: snyk/snyk@1.0.2
@@ -50,7 +50,7 @@ workflows:
       - sonarcloud:
           context: SonarCloud
       - semgrep-scan
-      - snyk-scan:
+      - snyk-sca-scan:
           context: SnykToken
       - trufflehog-scan
       # Supported file extensions for IaC are tf, yml, yaml & json    
