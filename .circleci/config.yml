@@ -27,7 +27,7 @@ jobs:
       - run:
           name: "Semgrep scan"
           command: semgrep-agent
-  snyk-sca-scan:
+  snyk-scan:
     docker:
       - image: 'cimg/python:3.9.6'
     steps:
@@ -50,7 +50,7 @@ workflows:
       - sonarcloud:
           context: SonarCloud
       - semgrep-scan
-      - snyk-sca-scan:
+      - snyk-scan:
           context: SnykToken
       - trufflehog-scan
       # Supported file extensions for IaC are tf, yml, yaml & json    
