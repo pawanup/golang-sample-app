@@ -3,9 +3,11 @@ version: 2.1
 jobs:
   sonarcloud:
     docker:
-      - image: 'cimg/python:3.9.6'
+      - image: 'cimg/go:1.16'
     steps:
       - checkout
+      - run: go get -d -v ./...
+      - run: go install -v ./...      
       - sonarcloud/scan
   semgrep-scan:
     parameters:
@@ -32,6 +34,8 @@ jobs:
       - image: 'cimg/go:1.16'
     steps:
       - checkout
+      - run: go get -d -v ./...
+      - run: go install -v ./...
       - snyk/scan
   trufflehog-scan:
     docker:
